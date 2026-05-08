@@ -54,10 +54,8 @@ pose_model = YOLO('yolov8n-pose.pt')   # 최초 실행 시 자동 다운로드
 print("[로딩] 완료.")
 
 
-# ================================================================
-# ────────얼굴 검출 ────────────────────────────────────────────
-# ================================================================
 
+# ────────얼굴 검출 ────────────────────────────────────────────
 def detect_faces(frame: np.ndarray) -> list:
     """Haar Cascade + CLAHE 전처리로 얼굴 BBox 검출."""
     gray    = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -68,11 +66,7 @@ def detect_faces(frame: np.ndarray) -> list:
     )
     return list(faces) if len(faces) > 0 else []
 
-
-# ================================================================
 # ────────신체 키포인트 추출 ──────────────────────────────────
-# ================================================================
-
 def get_keypoints(frame: np.ndarray) -> dict | None:
     """
     YOLOv8-pose로 가장 큰 인물의 키포인트 추출.
@@ -110,11 +104,7 @@ def get_keypoints(frame: np.ndarray) -> dict | None:
         'r_hip':   g(KP_R_HIP),
     }
 
-
-# ================================================================
 # ──────── 제스처 분류 ──────────────────────────────────────────
-# ================================================================
-
 def classify_gesture(kps: dict, fw: int, fh: int) -> dict | None:
     """
     신체 키포인트로 제스처 분류. 우선순위:
@@ -190,11 +180,7 @@ def classify_gesture(kps: dict, fw: int, fh: int) -> dict | None:
 
     return None
 
-
-# ================================================================
 # ────────시각화 ───────────────────────────────────────────────
-# ================================================================
-
 def draw_face_box(frame, faces):
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), COLOR_WHITE, 2)
@@ -253,11 +239,7 @@ def draw_gesture_label(frame, gesture: dict, fh: int):
     cv2.rectangle(frame, (x-6, y-th-10), (x+tw+6, y+8), (0, 0, 0), -1)
     cv2.putText(frame, label, (x, y), font, scale, color, thick, cv2.LINE_AA)
 
-
-# ================================================================
 # ────────메인 루프 ────────────────────────────────────────────
-# ================================================================
-
 def run(camera_index: int = 0):
     cap = cv2.VideoCapture(camera_index)
     if not cap.isOpened():
