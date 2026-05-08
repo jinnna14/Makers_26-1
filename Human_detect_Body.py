@@ -114,6 +114,7 @@ def classify_gesture(kps: dict, fw: int, fh: int) -> dict | None:
     4. Yaw(-/+)     — 한쪽 손목 가슴 근처
     5. Roll(+/-)    — 한쪽 팔만 어깨보다 위로
     6. Takeoff/Hover— 양팔 T자 (손목 y ≈ 어깨 y)
+    직관적인 인식을 위해 pitch 가 생략되었으나 중간 발표 이후 추가 예정
     """
     # 신뢰도 낮은 키포인트가 있으면 판단 불가
     for v in kps.values():
