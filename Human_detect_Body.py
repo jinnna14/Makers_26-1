@@ -294,7 +294,7 @@ def run(camera_index: int = 0):
                 if gesture:
                     draw_gesture_label(frame, gesture, fh)
             else:
-                cv2.putText(frame, "Pose Lost – step back", (20, fh//2),
+                cv2.putText(frame, "***조종자 자리 이탈***", (20, fh//2),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.9, COLOR_WHITE, 2, cv2.LINE_AA)
 
         # ── 공통 UI ───────────────────────────────────────────────
